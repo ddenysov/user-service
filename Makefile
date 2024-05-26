@@ -1,9 +1,12 @@
+APP := events-app
 DC := docker-compose exec
-EVENTS := $(DC) events-app
 MYSQL := $(DC) -T mysql
 
+install:
+	docker-compose run $(APP) composer install
+
 ssh:
-	@$(EVENTS) bash
+	@$(DC) $(APP) bash
 
 start:
 	docker-compose up -d
@@ -12,4 +15,7 @@ stop:
 	docker-compose down
 
 build:
-	docker-compose build events-app
+	docker-compose build $(APP)
+
+schema:
+	docker-compose run $(APP) symfony console doctrine:schema:create
