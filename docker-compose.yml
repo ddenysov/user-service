@@ -1,0 +1,11 @@
+services:
+  events-app:
+    build:
+      context: .
+      dockerfile: ./events/etc/Dockerfile
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
